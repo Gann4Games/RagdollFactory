@@ -2,9 +2,6 @@
 A tool to create ragdolls easily in Unity by clicking on the bones you want to have rigidbodies, joints and collisions.
 You can build a complete ragdoll in under five minutes with this, useful if you use a lot of ragdolls and they also vary in shapes or anatomy.
 
-### Made in Unity 2021.3.20f1 - Can't guarantee it works on older versions.
-This version also seems to have a bug with the gizmos for colliders, so they might not appear in the scene view. They still work, though.
-
 ## Installation
 * Open Unity's Pakage Manager
 * Add a new package from git url...
