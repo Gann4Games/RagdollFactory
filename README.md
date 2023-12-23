@@ -6,9 +6,9 @@ You can build a complete ragdoll in under five minutes with this, useful if you 
 This version also seems to have a bug with the gizmos for colliders, so they might not appear in the scene view. They still work, though.
 
 ## Installation
-* Make sure you already have the unity editor open.
-* Download and **open** the .unitypackage file from the [releases page](https://github.com/Gann4Life/RagdollFactory/releases).
-* A window will appear asking you to import the package, click on `Import`.
+* Open Unity's Pakage Manager
+* Add a new package from git url...
+* Paste `https://github.com/Gann4Games/RagdollFactory.git` into the text field and begin using the tool.
 
 ## Usage
 1. Once imported, select your model.
