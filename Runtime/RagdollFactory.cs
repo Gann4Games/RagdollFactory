@@ -1,7 +1,4 @@
 #if UNITY_EDITOR
-
-// Testing github workflow with a comment :)
-
 using System;
 using UnityEngine;
 using System.Linq;
