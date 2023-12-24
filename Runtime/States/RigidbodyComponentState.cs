@@ -10,24 +10,19 @@ namespace Gann4Games.RagdollFactory.States
     {
         private bool Pressed(Rigidbody rb)
         {
-            // return Handles.Button(
-            //     rb.transform.position, 
-            //     SceneView.currentDrawingSceneView.camera.transform.rotation,
-            //     rb.mass * Context.discRadius, 
-            //     rb.mass * Context.discRadius, 
-            //     Handles.DotHandleCap
-            // );
+            var handlePosition = rb.transform.position;
+            var handleSize = rb.mass * Context.discRadius;
             
             Handles.DrawSolidDisc(
-                rb.transform.position,
+                handlePosition,
                 SceneView.currentDrawingSceneView.camera.transform.forward,
-                rb.mass * Context.discRadius);
-            
+                handleSize);
+
             return Handles.Button(
-                rb.transform.position,
+                handlePosition,
                 SceneView.currentDrawingSceneView.camera.transform.rotation,
-                rb.mass * Context.discRadius,
-                rb.mass * Context.discRadius,
+                handleSize,
+                handleSize,
                 Handles.CircleHandleCap
                 );
             
@@ -55,8 +50,9 @@ namespace Gann4Games.RagdollFactory.States
         {
             Handles.DrawWireDisc(CenterOfMass(), SceneView.currentDrawingSceneView.camera.transform.forward, Context.discRadius * 2);
 
-            foreach(Rigidbody rb in ComponentList.ToArray())
+            foreach(var component in ComponentList.ToArray())
             {
+                var rb = (Rigidbody)component;
                 if(!rb) continue;
 
                 
@@ -112,17 +108,18 @@ namespace Gann4Games.RagdollFactory.States
         /// <returns></returns>
         private Vector3 CenterOfMass()
         {
-            Vector3 CoM = Vector3.zero;
+            Vector3 centerOfMass = Vector3.zero;
             float mass = 0f;
  
-            foreach (Rigidbody part in ComponentList)
+            foreach (var component in ComponentList)
             {
-                CoM += part.worldCenterOfMass * part.mass;
+                var part = (Rigidbody)component;
+                centerOfMass += part.worldCenterOfMass * part.mass;
                 mass += part.mass;
             }
  
-            CoM /= mass;
-            return CoM;
+            centerOfMass /= mass;
+            return centerOfMass;
         }
     }
 }

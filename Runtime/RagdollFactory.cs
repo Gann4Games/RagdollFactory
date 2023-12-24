@@ -13,10 +13,10 @@ namespace Gann4Games.RagdollFactory
 
         public RFComponentState[] States { get; private set; }
         
-        public BoxColliderComponentState BoxColliderComponentState;
-        public CapsuleColliderComponentState CapsuleColliderComponentState;
-        public ConfigurableJointComponentState ConfigurableJointComponentState;
-        public RigidbodyComponentState RigidbodyComponentState;
+        public BoxColliderComponentState boxColliderComponentState;
+        public CapsuleColliderComponentState capsuleColliderComponentState;
+        public ConfigurableJointComponentState configurableJointComponentState;
+        public RigidbodyComponentState rigidbodyComponentState;
         
         public Transform[] Bones => GetComponentsInChildren<Transform>().Where(bone => bone.GetComponent<Collider>() == false).ToArray();
 
@@ -37,24 +37,22 @@ namespace Gann4Games.RagdollFactory
         
         // Joint settings
         public Vector3 jointAxis = new(1, 0, 0);
-        [Range(0, 180)] public float jointLowXLimit = 0;
-        [Range(0, 180)] public float jointHighXLimit = 0;
-        [Range(0, 180)] public float jointYLimit = 0;
-        [Range(0, 180)] public float jointZLimit = 0;
+        [Range(0, 180)] public float jointLowXLimit;
+        [Range(0, 180)] public float jointHighXLimit;
+        [Range(0, 180)] public float jointYLimit;
+        [Range(0, 180)] public float jointZLimit;
 
         // Rigidbody settings
         public float rigidbodyMass = 1;
-        public float rigidbodyDrag = 0;
+        public float rigidbodyDrag;
         public float rigidbodyAngularDrag = 0.05f;
         public bool rigidbodyUseGravity = true;
-        public bool rigidbodyIsKinematic = false;
+        public bool rigidbodyIsKinematic;
         
         [Header("Gizmos Settings")]
-        public bool showGizmos = true;
-        public bool showNames = false;
         public float discRadius = 0.02f;
-        public Color normalColor = new Color(1, 1, 1, 0.25f);
-        public Color selectedColor = new Color(1, 1, 0, 0.25f);
+        public Color normalColor = new(1, 1, 1, 0.25f);
+        public Color selectedColor = new(1, 1, 0, 0.25f);
 
         public bool IsFirstBoneSelected => selectedBoneA != null;
 
@@ -98,19 +96,19 @@ namespace Gann4Games.RagdollFactory
 
         private void OnEnable()
         {   
-            CapsuleColliderComponentState = new CapsuleColliderComponentState(this);
-            BoxColliderComponentState = new BoxColliderComponentState(this);
-            ConfigurableJointComponentState = new ConfigurableJointComponentState(this);
-            RigidbodyComponentState = new RigidbodyComponentState(this);
+            capsuleColliderComponentState = new CapsuleColliderComponentState(this);
+            boxColliderComponentState = new BoxColliderComponentState(this);
+            configurableJointComponentState = new ConfigurableJointComponentState(this);
+            rigidbodyComponentState = new RigidbodyComponentState(this);
             States = new RFComponentState[]
             {
-                CapsuleColliderComponentState, 
-                BoxColliderComponentState, 
-                ConfigurableJointComponentState, 
-                RigidbodyComponentState
+                capsuleColliderComponentState, 
+                boxColliderComponentState, 
+                configurableJointComponentState, 
+                rigidbodyComponentState
             };
 
-            CurrentComponent = CapsuleColliderComponentState;
+            CurrentComponent = capsuleColliderComponentState;
         }
     }
 }

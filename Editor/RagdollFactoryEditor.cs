@@ -9,12 +9,8 @@ namespace Gann4Games.RagdollFactory
     [CustomEditor(typeof(RagdollFactory))]
     public partial class RagdollFactoryEditor : Editor
     {
-        public static RagdollFactoryEditor Instance;
-
+        private static readonly GUIStyle GUIAlertStyle = new GUIStyle();
         private RagdollFactory _target;
-
-
-        private GUIStyle GUI_ALERT_STYLE = new GUIStyle();
 
         #region Serialized Properties
 
@@ -41,27 +37,24 @@ namespace Gann4Games.RagdollFactory
         #endregion
 
         #region Icon paths
-        private string ContentPath => Path.Combine("Packages", "com.gann4games.ragdollfactory", "Content");
-        private string iconAddPath => Path.Combine(ContentPath, "Icons/Actions/add.png");
-        private string iconSelectPath => Path.Combine(ContentPath, "Icons/Actions/select.png");
-        private string iconDeletePath => Path.Combine(ContentPath, "Icons/Actions/delete.png");
-        private string iconCapsulePath => Path.Combine(ContentPath, "Icons/Components/capsule.png");
-        private string iconBoxPath => Path.Combine(ContentPath, "Icons/Components/box.png");
-        private string iconJointPath => Path.Combine(ContentPath, "Icons/Components/joint.png");
-        private string iconRigidbodyPath => Path.Combine(ContentPath, "Icons/Components/rigidbody.png");
+        private static string ContentPath => Path.Combine("Packages", "com.gann4games.ragdollfactory", "Content");
+        private static string iconAddPath => Path.Combine(ContentPath, "Icons/Actions/add.png");
+        private static string iconSelectPath => Path.Combine(ContentPath, "Icons/Actions/select.png");
+        private static string iconDeletePath => Path.Combine(ContentPath, "Icons/Actions/delete.png");
+        private static string iconCapsulePath => Path.Combine(ContentPath, "Icons/Components/capsule.png");
+        private static string iconBoxPath => Path.Combine(ContentPath, "Icons/Components/box.png");
+        private static string iconJointPath => Path.Combine(ContentPath, "Icons/Components/joint.png");
+        private static string iconRigidbodyPath => Path.Combine(ContentPath, "Icons/Components/rigidbody.png");
 
-        private Texture2D iconAdd, iconSelect, iconDelete, iconCapsule, iconBox, iconJoint, iconRigidbody;
+        private Texture2D _add, _select, _delete, _capsule, _box, _joint, _rigidbody;
         #endregion
         
         private void OnEnable()
         {
             _target = (RagdollFactory)target;
             
-            GUI_ALERT_STYLE.fontStyle = FontStyle.Bold;
-            GUI_ALERT_STYLE.normal.textColor = Color.red;
-
-            if (!Instance)
-                Instance = this;
+            GUIAlertStyle.fontStyle = FontStyle.Bold;
+            GUIAlertStyle.normal.textColor = Color.red;
 
             ApplySerializedProperties();
             LoadButtonIcons();
@@ -69,13 +62,13 @@ namespace Gann4Games.RagdollFactory
 
         private void LoadButtonIcons()
         {
-            iconAdd = EditorGUIUtility.Load(iconAddPath) as Texture2D;
-            iconSelect = EditorGUIUtility.Load(iconSelectPath) as Texture2D;
-            iconDelete = EditorGUIUtility.Load(iconDeletePath) as Texture2D;
-            iconCapsule = EditorGUIUtility.Load(iconCapsulePath) as Texture2D;
-            iconBox = EditorGUIUtility.Load(iconBoxPath) as Texture2D;
-            iconJoint = EditorGUIUtility.Load(iconJointPath) as Texture2D;
-            iconRigidbody = EditorGUIUtility.Load(iconRigidbodyPath) as Texture2D;
+            _add = EditorGUIUtility.Load(iconAddPath) as Texture2D;
+            _select = EditorGUIUtility.Load(iconSelectPath) as Texture2D;
+            _delete = EditorGUIUtility.Load(iconDeletePath) as Texture2D;
+            _capsule = EditorGUIUtility.Load(iconCapsulePath) as Texture2D;
+            _box = EditorGUIUtility.Load(iconBoxPath) as Texture2D;
+            _joint = EditorGUIUtility.Load(iconJointPath) as Texture2D;
+            _rigidbody = EditorGUIUtility.Load(iconRigidbodyPath) as Texture2D;
         }
 
         private void ApplySerializedProperties()
@@ -115,19 +108,19 @@ namespace Gann4Games.RagdollFactory
         private void DrawInspectorTabs()
         {
             GUIContent[] componentTabs = {
-                new(iconCapsule, "Capsule colliders tab"),
-                new(iconBox, "Box colliders tab"),
-                new(iconJoint, "Configurable Joints tab"),
-                new(iconRigidbody, "Rigidbodies tab")
+                new(_capsule, "Capsule colliders tab"),
+                new(_box, "Box colliders tab"),
+                new(_joint, "Configurable Joints tab"),
+                new(_rigidbody, "Rigidbodies tab")
             };
             
             GUIContent[] actionTypeTabs = {
-                new(iconAdd, "Create"),
-                new(iconSelect, "Select"),
-                new(iconDelete, "Delete")
+                new(_add, "Create"),
+                new(_select, "Select"),
+                new(_delete, "Delete")
             };
             
-             _target.componentType = (RagdollFactory.ComponentType)GUILayout.Toolbar((int)_target.CurrentStateIndex(), componentTabs);
+             _target.componentType = (RagdollFactory.ComponentType)GUILayout.Toolbar(_target.CurrentStateIndex(), componentTabs);
              _target.SetState(_target.States[(int)_target.componentType]);
             _target.actionTypeOnClick = (RagdollFactory.ActionTypeOnClick)GUILayout.Toolbar((int)_target.actionTypeOnClick, actionTypeTabs);
             

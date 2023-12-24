@@ -45,7 +45,7 @@ namespace Gann4Games.RagdollFactory
                 if (_target.selectedBoneA == bone)
                 {
                     Handles.color = _target.selectedColor;
-                    Handles.Label(bone.position, "Waiting for second bone...", GUI_ALERT_STYLE);
+                    Handles.Label(bone.position, "Waiting for second bone...", GUIAlertStyle);
                 }
                 
                 bool bonePressed = Handles.Button(

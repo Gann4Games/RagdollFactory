@@ -64,8 +64,8 @@ namespace Gann4Games.RagdollFactory.States
             lastSelectedJoint.angularYLimit = new SoftJointLimit() {limit = Context.jointYLimit};
             lastSelectedJoint.angularZLimit = new SoftJointLimit() {limit = Context.jointZLimit};
         
-            Context.RigidbodyComponentState.Select(rigidbodyA);
-            Context.RigidbodyComponentState.Select(rigidbodyB);
+            Context.rigidbodyComponentState.Select(rigidbodyA);
+            Context.rigidbodyComponentState.Select(rigidbodyB);
             Select(joint);
         }
 
@@ -266,7 +266,7 @@ namespace Gann4Games.RagdollFactory.States
         public override void Delete()
         {
             Rigidbody rb = SelectedComponent.gameObject.GetComponent<Rigidbody>();
-            Context.RigidbodyComponentState.Delete(rb);
+            Context.rigidbodyComponentState.Delete(rb);
             base.Delete();
         }
     }

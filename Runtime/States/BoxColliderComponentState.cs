@@ -73,8 +73,8 @@ namespace Gann4Games.RagdollFactory.States
             
                 Undo.RegisterCompleteObjectUndo(collisionObject, "Converted Box Collider to Capsule Collider");
                 
-                Context.SetState(Context.CapsuleColliderComponentState);
-                Context.CapsuleColliderComponentState.Select(capsuleCollider);
+                Context.SetState(Context.capsuleColliderComponentState);
+                Context.capsuleColliderComponentState.Select(capsuleCollider);
             }
         }
 
